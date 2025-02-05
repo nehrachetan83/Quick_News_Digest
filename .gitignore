@@ -1,0 +1,84 @@
+# Node.js dependencies (React)
+node_modules/
+*.log
+.yarn.lock
+package-lock.json
+
+# Build files
+build/
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Editor and OS files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Flask dependencies
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+instance/
+*.sqlite3
+db.sqlite3
+
+# Flask logs
+logs/
+*.log
+
+# Python environment files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environment
+venv/
+env/
+
+# Pytest cache
+.pytest_cache/
+
+# Flask migrations
+migrations/
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+*.py,cover
+
+# Static & media files
+staticfiles/
+media/
+
+# Jupyter Notebook checkpoints (if applicable)
+.ipynb_checkpoints/
+
+# Cloudinary upload folder
+cloudinary/
+
+# Supabase table data and keys
+supabase/*.json
+supabase/.env
+
+# Large files and folders (add any other large files/folders here)
+*.zip
+*.tar.gz
+*.mp4
+*.mp3
+*.jpg
+*.png
+*.jpeg
+*.pdf
+.venv
+*.pem
