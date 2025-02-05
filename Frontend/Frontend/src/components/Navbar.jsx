@@ -57,9 +57,6 @@ function Navbar() {
           <Link to="/" className="text-lg font-semibold italic hover:text-gray-300 transition-all">
             Home
           </Link>
-          <Link to="/about" className="text-lg font-semibold italic hover:text-gray-300 transition-all">
-            About
-          </Link>
         </div>
 
         {/* Center Title */}
