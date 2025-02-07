@@ -7,17 +7,19 @@ from transformers import pipeline
 from supabase import create_client
 from dateutil import parser
 import cloudinary.uploader
+
 # --- Supabase Setup ---
 SUPABASE_URL = "https://bajhhvpalxxwahactfjk.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJhamhodnBhbHh4d2FoYWN0ZmprIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDI5NTczMywiZXhwIjoyMDQ5ODcxNzMzfQ.VNrL_c90uDa09vE6zKkmBbwFpTNH2VJoOwIOUoj_g6Q"
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-
+# --- Cloudinary Setup ---
 cloudinary.config(
     cloud_name="dtlgg1n87",
     api_key="353548598746717",
     api_secret="6-IE_w7935W0csyiE-YaiwEisVo"
 )
+
 # --- RSS Feeds ---
 RSS_FEEDS = {
     "top_stories": "http://timesofindia.indiatimes.com/rssfeedstopstories.cms",
@@ -30,9 +32,8 @@ RSS_FEEDS = {
 # --- Hugging Face Summarizer ---
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn", device=-1)  # Use CPU
 
-
-
-def fetch_and_store_news():
+# --- Fetch and Store News ---
+def fetch_and_store_news(max_items=40):
     for category, feed_url in RSS_FEEDS.items():
         print(f"Fetching news for category: {category}")
         try:
@@ -43,7 +44,7 @@ def fetch_and_store_news():
             continue
 
         soup = BeautifulSoup(response.content, "xml")
-        items = soup.find_all("item")[:10]
+        items = soup.find_all("item")[:max_items]  # Fetch up to max_items
 
         for item in items:
             title = item.find("title").text.strip()
@@ -66,6 +67,7 @@ def fetch_and_store_news():
 
     delete_old_news()
 
+# --- Upload Image to Cloudinary ---
 def upload_to_cloudinary(image_url):
     try:
         upload_result = cloudinary.uploader.upload(image_url)
@@ -105,11 +107,11 @@ def summarize_news(content):
     try:
         # Adjust input to avoid GPU memory errors
         content = content[:1024]  # Limit input size for summarization
-        summary = summarizer(content, max_length=100, min_length=50, do_sample=False)
+        summary = summarizer(content, max_length=200, min_length=50, do_sample=False)
         return summary[0]['summary_text']
     except Exception as e:
         print(f"Error summarizing content: {e}")
-        return content[:100]  # Return a fallback truncated summary
+        return content[:200]  # Return a fallback truncated summary
 
 # --- Store News in Supabase ---
 def store_news_in_db(category, title, link, image_url, summary, pub_date):
@@ -147,11 +149,20 @@ def extract_text_recursive(tag):
         return tag.string.strip()
     return " ".join(extract_text_recursive(child) for child in tag.children if child)
 
-# --- Scheduler ---
+# --- Scheduler for Production ---
 def run_scheduler():
-    schedule.every().hour.do(fetch_and_store_news)  # Run the job every hour
-    print("Scheduler started. Press Ctrl+C to stop.")
+    schedule.every(2).hours.do(fetch_and_store_news)  # Run every 2 hours
+    print("Production scheduler started. Press Ctrl+C to stop.")
     fetch_and_store_news()  # Run immediately on startup
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
+
+# --- Scheduler for Testing ---
+def run_test_scheduler():
+    schedule.every(5).minutes.do(lambda: fetch_and_store_news(max_items=5))  # Run every 5 minutes with fewer items
+    print("Test scheduler started. Press Ctrl+C to stop.")
+    fetch_and_store_news(max_items=5)  # Run immediately on startup
     while True:
         schedule.run_pending()
         time.sleep(60)
@@ -159,6 +170,8 @@ def run_scheduler():
 # --- Main ---
 if __name__ == "__main__":
     try:
-        run_scheduler()
+        # Uncomment the scheduler you want to use
+        # run_scheduler()  # Fo/r production
+        run_test_scheduler()  # For testing
     except KeyboardInterrupt:
         print("Scheduler stopped.")

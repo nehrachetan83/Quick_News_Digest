@@ -1,0 +1,20 @@
+my-vite-vue-project@0.0.0 /home/chetan/Desktop/QuickNews_Digest/Frontend/Frontend
+├── @eslint/js@9.17.0
+├── @types/react-dom@18.3.5
+├── @types/react@18.3.16
+├── @vitejs/plugin-react-swc@3.7.2
+├── autoprefixer@10.4.20
+├── axios@1.7.9
+├── eslint-plugin-react-hooks@5.1.0
+├── eslint-plugin-react-refresh@0.4.16
+├── eslint-plugin-react@7.37.2
+├── eslint@9.17.0
+├── globals@15.13.0
+├── postcss@8.4.49
+├── react-dom@18.3.1
+├── react-icons@5.4.0
+├── react-router-dom@7.0.2
+├── react@18.3.1
+├── tailwindcss@3.4.16
+└── vite@6.0.3
+
