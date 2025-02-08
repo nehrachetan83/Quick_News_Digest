@@ -35,9 +35,10 @@ jobs:
 
       - name: Run the news scraper
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          cloud_name: ${{ secrets.cloud_name }}
-          api_key: ${{ secrets.api_key }}
-          api_secret: ${{ secrets.api_secret }}
+          env:
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
+        API_KEY: ${{ secrets.API_KEY }}
+        API_SECRET: ${{ secrets.API_SECRET }}
         run: python Backend/news_scraper.py
