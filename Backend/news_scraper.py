@@ -1,5 +1,4 @@
 import requests
-import schedule
 import time
 from datetime import datetime, timedelta, timezone
 from bs4 import BeautifulSoup
