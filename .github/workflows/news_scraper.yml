@@ -33,11 +33,24 @@ jobs:
           pip install -r Backend/requirements.txt
           pip install transformers supabase requests beautifulsoup4 schedule python-dotenv cloudinary
 
+      - name: Debug Secrets
+        run: |
+          echo "Checking if secrets are set..."
+          [[ -z "${{ secrets.SUPABASE_URL }}" ]] && echo "❌ SUPABASE_URL is missing" || echo "✅ SUPABASE_URL is set"
+          [[ -z "${{ secrets.SUPABASE_KEY }}" ]] && echo "❌ SUPABASE_KEY is missing" || echo "✅ SUPABASE_KEY is set"
+          [[ -z "${{ secrets.CLOUD_NAME }}" ]] && echo "❌ CLOUD_NAME is missing" || echo "✅ CLOUD_NAME is set"
+          [[ -z "${{ secrets.API_KEY }}" ]] && echo "❌ API_KEY is missing" || echo "✅ API_KEY is set"
+          [[ -z "${{ secrets.API_SECRET }}" ]] && echo "❌ API_SECRET is missing" || echo "✅ API_SECRET is set"
+
+      - name: Create .env file
+        run: |
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> Backend/.env
+          echo "SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}" >> Backend/.env
+          echo "CLOUD_NAME=${{ secrets.CLOUD_NAME }}" >> Backend/.env
+          echo "API_KEY=${{ secrets.API_KEY }}" >> Backend/.env
+          echo "API_SECRET=${{ secrets.API_SECRET }}" >> Backend/.env
+
       - name: Run the news scraper
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
-          API_KEY: ${{ secrets.API_KEY }}
-          API_SECRET: ${{ secrets.API_SECRET }}
         run: python Backend/news_scraper.py
+        env:
+          DOTENV: "Backend/.env"
