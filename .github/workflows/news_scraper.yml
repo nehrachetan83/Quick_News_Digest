@@ -22,7 +22,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('Backend/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -30,7 +30,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install python-dateutil  # Correct package name
-          pip install -r backend/requirements.txt
+          pip install -r Backend/requirements.txt
           pip install transformers supabase requests beautifulsoup4 schedule python-dotenv cloudinary
 
       - name: Run the news scraper
@@ -40,4 +40,4 @@ jobs:
           cloud_name: ${{ secrets.cloud_name }}
           api_key: ${{ secrets.api_key }}
           api_secret: ${{ secrets.api_secret }}
-        run: python backend/news_scraper.py
+        run: python Backend/news_scraper.py
