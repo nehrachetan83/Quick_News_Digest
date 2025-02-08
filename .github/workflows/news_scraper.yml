@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r backend/requirements.txt
+          pip install -r Backend/requirements.txt
           pip install transformers supabase requests beautifulsoup4 schedule python-dotenv cloudinary dateutil
 
       - name: Run the news scraper
@@ -31,4 +31,4 @@ jobs:
           api_key: ${{ secrets.api_key }}
           api_secret: ${{ secrets.api_secret }}
         run: |
-          python backend/news_scraper.py
+          python Backend/news_scraper.py
