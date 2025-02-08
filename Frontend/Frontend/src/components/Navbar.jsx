@@ -30,7 +30,7 @@ function Navbar() {
   const handleLogout = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/auth/logout', { method: 'POST', credentials: 'include' });
+      const response = await fetch('https://localhost:5000/auth/logout', { method: 'POST', credentials: 'include' });
       if (response.ok) {
         setAuthState({ isLoggedIn: false, userName: '' });
         navigate('/'); // Redirect to home after logout

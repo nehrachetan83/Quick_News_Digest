@@ -1,9 +1,11 @@
 import bcrypt
 from supabase import create_client
-
-# Set your Supabase credentials
-SUPABASE_URL = "https://bajhhvpalxxwahactfjk.supabase.co"  # Replace with your Supabase project URL
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJhamhodnBhbHh4d2FoYWN0ZmprIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDI5NTczMywiZXhwIjoyMDQ5ODcxNzMzfQ.VNrL_c90uDa09vE6zKkmBbwFpTNH2VJoOwIOUoj_g6Q"  # Replace with your Service Role Key
+from dotenv import load_dotenv
+load_dotenv()
+import os
+# --- Supabase Setup ---
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 

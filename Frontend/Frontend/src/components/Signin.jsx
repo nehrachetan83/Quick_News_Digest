@@ -21,7 +21,7 @@ function SignIn() {
     setIsLoading(true); // Show spinner
 
     try {
-      const response = await axios.post('https://localhost:5000/auth/signup', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/signup`, {
         fullName,
         email,
         password,

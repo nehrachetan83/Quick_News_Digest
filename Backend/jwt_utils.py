@@ -1,11 +1,13 @@
 import jwt
 import datetime
-
-SECRET_KEY = "your_secret_key_here"  # Replace with a secure key
+from dotenv import load_dotenv
+load_dotenv()
+import os
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # Generate a JWT
 def generate_jwt(payload):
-    payload['exp'] = datetime.datetime.utcnow() + datetime.timedelta(hours=1)  # Token expires in 1 hour
+    payload['exp'] = datetime.datetime.utcnow() + datetime.timedelta(hours=1) 
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
 # Verify a JWT

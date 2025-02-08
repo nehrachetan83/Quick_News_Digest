@@ -10,7 +10,7 @@ function NewsPage() {
     const fetchNews = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`https://localhost:5000/news/${category}`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/news/${category}`, {
           credentials: 'include', // Include cookies for secure requests
         });
         if (response.ok) {

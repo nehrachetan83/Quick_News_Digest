@@ -7,18 +7,20 @@ from transformers import pipeline
 from supabase import create_client
 from dateutil import parser
 import cloudinary.uploader
-
+from dotenv import load_dotenv
+load_dotenv()
+import os
 # --- Supabase Setup ---
-SUPABASE_URL = "https://bajhhvpalxxwahactfjk.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJhamhodnBhbHh4d2FoYWN0ZmprIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDI5NTczMywiZXhwIjoyMDQ5ODcxNzMzfQ.VNrL_c90uDa09vE6zKkmBbwFpTNH2VJoOwIOUoj_g6Q"
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
-# --- Cloudinary Setup ---
+
 cloudinary.config(
-    cloud_name="dtlgg1n87",
-    api_key="353548598746717",
-    api_secret="6-IE_w7935W0csyiE-YaiwEisVo"
+    cloud_name=os.getenv("cloud_name"),
+    api_key=os.getenv("api_key"),
+    api_secret=os.getenv("api_secret")
 )
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # --- RSS Feeds ---
 RSS_FEEDS = {
@@ -151,7 +153,7 @@ def extract_text_recursive(tag):
 
 # --- Scheduler for Production ---
 def run_scheduler():
-    schedule.every(2).hours.do(fetch_and_store_news)  # Run every 2 hours
+    schedule.every(6).hours.do(fetch_and_store_news)  # Run every 2 hours
     print("Production scheduler started. Press Ctrl+C to stop.")
     fetch_and_store_news()  # Run immediately on startup
     while True:

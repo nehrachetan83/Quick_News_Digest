@@ -6,15 +6,18 @@ import bcrypt
 from flask_cors import CORS
 import cloudinary
 import cloudinary.uploader
+from dotenv import load_dotenv
+load_dotenv()
+import os
 # --- Supabase Setup ---
-SUPABASE_URL = "https://bajhhvpalxxwahactfjk.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJhamhodnBhbHh4d2FoYWN0ZmprIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDI5NTczMywiZXhwIjoyMDQ5ODcxNzMzfQ.VNrL_c90uDa09vE6zKkmBbwFpTNH2VJoOwIOUoj_g6Q"
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 
 cloudinary.config(
-    cloud_name="dtlgg1n87",
-    api_key="353548598746717",
-    api_secret="6-IE_w7935W0csyiE-YaiwEisVo"
+    cloud_name=os.getenv("cloud_name"),
+    api_key=os.getenv("api_key"),
+    api_secret=os.getenv("api_secret")
 )
 # Create a Supabase client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)

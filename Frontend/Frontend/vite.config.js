@@ -9,13 +9,13 @@ export default defineConfig({
     https: {
       key: fs.readFileSync('./localhost-key.pem'),
       cert: fs.readFileSync('./localhost.pem'),
-    },
-    proxy: {
-      '/auth': {
-        target: 'https://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    }
+    // proxy: {
+    //   '/auth': {
+    //     target: 'https://localhost:5000',
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    // },
   },
 });
