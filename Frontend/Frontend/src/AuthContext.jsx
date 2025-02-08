@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     // Check if user is authenticated by making a request to `/auth/me`
     const checkAuthStatus = async () => {
       try {
-        const response = await fetch('https://localhost:5000/auth/me', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/me`, {
           method: 'GET',
           credentials: 'include',
         });

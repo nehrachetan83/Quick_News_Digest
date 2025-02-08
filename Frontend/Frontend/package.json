@@ -1,5 +1,4 @@
 {
-  "proxy": "https://localhost:5000",
   "name": "my-vite-vue-project",
   "private": true,
   "version": "0.0.0",

@@ -10,7 +10,7 @@ function HomePage() {
             Welcome to Quick News Digest
           </h1>
           <p className="text-lg md:text-xl mb-6">
-            Get your daily dose of news summarized in 60 words or less, powered by AI. Stay informed on the latest updates across categories like Sports, Technology, Politics, and more.
+            Get your daily dose of news summarized in 100 words or less, powered by AI. Stay informed on the latest updates across categories like Sports, Technology, Politics, and more.
           </p>
           <p className="text-md md:text-lg text-gray-300 mb-6">
             Whether it's global events, trending stories, or niche topics, Quick News Digest delivers the news that matters to you, simply and concisely.
