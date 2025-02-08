@@ -152,28 +152,29 @@ def extract_text_recursive(tag):
     return " ".join(extract_text_recursive(child) for child in tag.children if child)
 
 # --- Scheduler for Production ---
-def run_scheduler():
-    schedule.every(6).hours.do(fetch_and_store_news)  # Run every 2 hours
-    print("Production scheduler started. Press Ctrl+C to stop.")
-    fetch_and_store_news()  # Run immediately on startup
-    while True:
-        schedule.run_pending()
-        time.sleep(60)
+# def run_scheduler():
+#     schedule.every(6).hours.do(fetch_and_store_news)  # Run every 2 hours
+#     print("Production scheduler started. Press Ctrl+C to stop.")
+#     fetch_and_store_news()  # Run immediately on startup
+#     while True:
+#         schedule.run_pending()
+#         time.sleep(60)
 
-# --- Scheduler for Testing ---
-def run_test_scheduler():
-    schedule.every(5).minutes.do(lambda: fetch_and_store_news(max_items=5))  # Run every 5 minutes with fewer items
-    print("Test scheduler started. Press Ctrl+C to stop.")
-    fetch_and_store_news(max_items=5)  # Run immediately on startup
-    while True:
-        schedule.run_pending()
-        time.sleep(60)
+# # --- Scheduler for Testing ---
+# def run_test_scheduler():
+#     schedule.every(5).minutes.do(lambda: fetch_and_store_news(max_items=5))  # Run every 5 minutes with fewer items
+#     print("Test scheduler started. Press Ctrl+C to stop.")
+#     fetch_and_store_news(max_items=5)  # Run immediately on startup
+#     while True:
+#         schedule.run_pending()
+#         time.sleep(60)
 
 # --- Main ---
 if __name__ == "__main__":
-    try:
+    fetch_and_store_news()
+    # try:
         # Uncomment the scheduler you want to use
         # run_scheduler()  # Fo/r production
-        run_test_scheduler()  # For testing
-    except KeyboardInterrupt:
-        print("Scheduler stopped.")
+    #     run_test_scheduler()  # For testing
+    # except KeyboardInterrupt:
+    #     print("Scheduler stopped.")

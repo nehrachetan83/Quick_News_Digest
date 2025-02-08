@@ -1,0 +1,34 @@
+name: Run News Scraper Every 6 Hours
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # Runs every 6 hours
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  run-news-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install -r backend/requirements.txt
+          pip install transformers supabase requests beautifulsoup4 schedule python-dotenv cloudinary dateutil
+
+      - name: Run the news scraper
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          cloud_name: ${{ secrets.cloud_name }}
+          api_key: ${{ secrets.api_key }}
+          api_secret: ${{ secrets.api_secret }}
+        run: |
+          python backend/news_scraper.py
