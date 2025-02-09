@@ -6,30 +6,6 @@ function Footer() {
   return (
     <footer className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 w-full text-white py-6">
       <div className="max-w-screen-xl mx-auto px-4 text-center">
-        {/* Quick Links */}
-        <div className="flex flex-wrap justify-center gap-8 mb-4">
-          <Link 
-            to="/" 
-            className="text-lg font-semibold hover:text-gray-300 transition-all">
-            Home
-          </Link>
-          <Link 
-            to="/about" 
-            className="text-lg font-semibold hover:text-gray-300 transition-all">
-            About Us
-          </Link>
-          <Link 
-            to="/privacy" 
-            className="text-lg font-semibold hover:text-gray-300 transition-all">
-            Privacy Policy
-          </Link>
-          <Link 
-            to="/contact" 
-            className="text-lg font-semibold hover:text-gray-300 transition-all">
-            Contact
-          </Link>
-        </div>
-
         {/* Social Media Icons */}
         <div className="flex justify-center space-x-6 mb-4">
           <a 
