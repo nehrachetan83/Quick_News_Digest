@@ -61,12 +61,13 @@ function Navbar() {
 
         {/* Center Title */}
         <div className="text-center">
-          <h1 className="text-2xl font-extrabold italic tracking-wider">
+          <h1 className="text-lg sm:text-2xl md:text-3xl font-extrabold italic tracking-wide sm:tracking-wider">
             <span className="text-orange-400">Quick</span>
             <span className="text-white"> News </span>
             <span className="text-green-400">Digest</span>
           </h1>
         </div>
+
 
         {/* Right Links */}
         <div className="flex space-x-6 items-center">
